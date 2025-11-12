@@ -1,15 +1,5 @@
 const { Events, EmbedBuilder } = require('discord.js');
-const database = require('../utils/database');
-
-async function getLogChannel(guild, typeKey) {
-  const guildData = await database.getGuild(guild.id);
-  if (!guildData) return null;
-  const perTypeId = guildData.logChannels?.[typeKey];
-  const fallbackId = guildData.logChannelId;
-  const targetId = perTypeId || fallbackId;
-  if (!targetId) return null;
-  return guild.channels.cache.get(targetId) || null;
-}
+const { sendLog } = require('../utils/logger');
 
 module.exports = {
   name: 'voiceLoggers',
@@ -19,10 +9,6 @@ module.exports = {
       try {
         const guild = newState.guild || oldState.guild;
         if (!guild) return;
-        const guildData = await database.getGuild(guild.id);
-        if (!guildData?.logs?.voice) return;
-        const logChannel = await getLogChannel(guild, 'voice');
-        if (!logChannel) return;
         const member = newState.member || oldState.member;
 
         let action = null;
@@ -50,8 +36,10 @@ module.exports = {
           )
           .setColor(0x00CED1)
           .setTimestamp();
-        await logChannel.send({ embeds: [embed] });
-      } catch (e) {}
+        await sendLog(guild, embed, 'voice');
+      } catch (error) {
+        console.error('Error in VoiceStateUpdate logger:', error);
+      }
     });
   }
 };

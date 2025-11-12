@@ -13,8 +13,12 @@ const client = new Client({
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.GuildBans,
+        GatewayIntentBits.GuildInvites,
+        GatewayIntentBits.GuildEmojisAndStickers,
     ],
-    partials: [Partials.Message, Partials.Channel, Partials.GuildMember],
+    partials: [Partials.Message, Partials.Channel, Partials.GuildMember, Partials.Reaction],
 });
 
 // Create a collection for commands
