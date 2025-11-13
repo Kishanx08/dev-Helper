@@ -3,7 +3,6 @@ const fs = require("fs");
 const path = require("path");
 const database = require("./utils/database");
 const ReminderScheduler = require("./utils/reminderScheduler");
-require("./server.js");
 
 // Create a new client instance
 const client = new Client({
