@@ -9,9 +9,6 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "engines": {
-    "node": "18.x"
-  },
   "dependencies": {
     "discord.js": "^14.21.0",
     "express": "^5.1.0",
@@ -19,7 +16,6 @@
     "mongoose": "^8.16.2",
     "passport": "^0.7.0",
     "passport-discord": "^0.1.4",
-    "@passport-discord/strategy": "^0.0.1",
     "express-session": "^1.17.3",
     "connect-mongo": "^5.1.0",
     "ejs": "^3.1.9"
